@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentFinesSystem", "StudentFinesSystem\StudentFinesSystem.csproj", "{7AB05BCE-3384-4257-9C9A-83F75A9AFE85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentFinesSystem", "StudentFinesSystem\StudentFinesSystem.csproj", "{7AB05BCE-3384-4257-9C9A-83F75A9AFE85}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "StudentData", "StudentData\StudentData.sqlproj", "{62CDF87C-4D40-4EFE-9DFD-13EB3F821264}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,6 +19,12 @@ Global
 		{7AB05BCE-3384-4257-9C9A-83F75A9AFE85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7AB05BCE-3384-4257-9C9A-83F75A9AFE85}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7AB05BCE-3384-4257-9C9A-83F75A9AFE85}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{62CDF87C-4D40-4EFE-9DFD-13EB3F821264}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62CDF87C-4D40-4EFE-9DFD-13EB3F821264}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62CDF87C-4D40-4EFE-9DFD-13EB3F821264}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{62CDF87C-4D40-4EFE-9DFD-13EB3F821264}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62CDF87C-4D40-4EFE-9DFD-13EB3F821264}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62CDF87C-4D40-4EFE-9DFD-13EB3F821264}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
