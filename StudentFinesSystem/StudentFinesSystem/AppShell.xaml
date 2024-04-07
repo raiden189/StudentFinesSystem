@@ -7,13 +7,18 @@
     Shell.FlyoutBehavior="Disabled"
     Title="StudentFinesSystem">
 
-    <ShellContent
-        Title=""
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
-
-    <!--<ShellContent
-        Title=""
+    <FlyoutItem Title="Students" FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent
+        Title="Students"
         ContentTemplate="{DataTemplate local:FinesListPage}"
-        Route="FinesListPage" />-->
+        Route="StudentsPage"
+        Icon="dotnet_bot.png"/>
+
+        <ShellContent
+         Title="Fines"
+         ContentTemplate="{DataTemplate local:FinesListPage}"
+         Route="FinesListPage"
+         Icon="dotnet_bot.png"/>
+    </FlyoutItem>
+
 </Shell>

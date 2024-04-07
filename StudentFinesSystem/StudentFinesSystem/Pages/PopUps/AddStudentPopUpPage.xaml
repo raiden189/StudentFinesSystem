@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StudentFinesSystem.Pages.AddStudentPopUpPage"
+             xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Color="Transparent"
+             CanBeDismissedByTappingOutsideOfPopup="False">
+
+    <Border Margin="20" Padding="20" BackgroundColor="PapayaWhip" VerticalOptions="Fill">
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="40" Stroke="Transparent"/>
+        </Border.StrokeShape>
+        <VerticalStackLayout Spacing="5">
+            <Image
+                Source="add_fine.png"
+                HeightRequest="100"
+                Aspect="AspectFit"
+                SemanticProperties.Description="update fines image" />
+
+            <Picker Title="Select Fine"
+                ItemsSource="{Binding Fines}"
+                ItemDisplayBinding="{Binding FineName}"
+                SelectedItem="{Binding SelectedFine}"/>
+
+            <Entry
+                  Text="{Binding SelectedFine.FineName}"
+                  Placeholder="Name"
+                  IsReadOnly="True"
+                  MinimumWidthRequest="200"
+                  SemanticProperties.Hint="Fine Name"/>
+
+            <Entry
+                  Text="{Binding SelectedFine.FineDescription}"
+                  Placeholder="Description"
+                  IsReadOnly="True"
+                  MinimumWidthRequest="200"
+                  SemanticProperties.Hint="Fine Description"/>
+
+            <Entry
+                 Text="{Binding SelectedFine.Fine}"
+                 IsReadOnly="True"
+                 Placeholder="Amount"
+                 Keyboard="Numeric"
+                 SemanticProperties.Hint="Fine"/>
+
+
+            <HorizontalStackLayout>
+                <Button Text="Add"
+                     Padding="10"
+                     Margin="10"                          
+                     CornerRadius="10"
+                     Command="{Binding AddCommand}"
+                     HorizontalOptions="End"
+                     VerticalOptions="End"/>
+
+                <Button Text="Close"
+                     Padding="10"
+                     Margin="10"
+                     CornerRadius="10"
+                     HorizontalOptions="End"
+                     VerticalOptions="End"                                
+                     Clicked="Button_Clicked"/>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </Border>
+</mct:Popup>

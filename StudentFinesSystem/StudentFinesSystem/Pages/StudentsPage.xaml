@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:searchHandler="clr-namespace:StudentFinesSystem.Controls"
+             xmlns:mct ="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="StudentFinesSystem.StudentsPage"
+             Shell.BackgroundColor="DarkBlue"
+             Shell.NavBarHasShadow="True"
+             Title="StudentsPage">
+    
+    <ContentPage.Behaviors>
+        <mct:EventToCommandBehavior Command="{Binding OnAppearingCommand}" EventName="Appearing" />
+        <mct:EventToCommandBehavior Command="{Binding OnDisapearCommand}" EventName="Disappearing" />
+    </ContentPage.Behaviors>
+    
+    <Shell.SearchHandler>
+        <searchHandler:StudentSearchHandler
+                                      ShowsResults="true"
+                                      DisplayMemberName="FullName"
+                                      BackgroundColor="DarkBlue"
+                                      Students="{Binding Students, Mode=TwoWay}"/>
+    </Shell.SearchHandler>
+
+    <Grid Padding="10">
+        <ScrollView>
+            <VerticalStackLayout>
+                <ListView x:Name="listView"
+                          ItemsSource="{Binding Students}"
+                          IsPullToRefreshEnabled="true"
+                          RefreshCommand="{Binding RefreshCommand}"
+                          IsRefreshing="{Binding IsRefreshing}"
+                          CachingStrategy="RecycleElement">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ImageCell ImageSource="{Binding StudentImage}"
+                               Text="{Binding FullName}"
+                               Detail="{Binding Gender}" >
+                                <ImageCell.ContextActions>
+                                    <MenuItem Text="View Fines" IsDestructive="True"
+                                          Command="{Binding Source={x:Reference listView}, Path=BindingContext.ViewCommand}"
+                                          CommandParameter="{Binding .}" />
+                                </ImageCell.ContextActions>
+                            </ImageCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

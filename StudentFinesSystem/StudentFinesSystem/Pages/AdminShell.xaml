@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Shell      
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:StudentFinesSystem"
+    x:Class="StudentFinesSystem.Pages.AdminShell"
+    Title="AdminShell">
+
+    <Shell.FlyoutHeader>
+        <Image Source="header.jpg"/>
+    </Shell.FlyoutHeader>
+    
+    <FlyoutItem Title="Admin" FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent
+            Title="Students"
+            ContentTemplate="{DataTemplate local:StudentsPage}"
+            Route="StudentsPage"
+            Icon="student.png"/>
+
+        <ShellContent
+             Title="Fines"
+             ContentTemplate="{DataTemplate local:FinesListPage}"
+             Route="FinesListPage"
+             Icon="fines.png"/>
+
+        <ShellContent
+             Title="Account"
+             ContentTemplate="{DataTemplate local:AccountPage}"
+             Route="AccountPage"
+             Icon="account.png"/>
+    </FlyoutItem>
+
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid ColumnSpacing="10" RowDefinitions="7, Auto, 7, 1" ColumnDefinitions="35, *">
+                <Image Grid.Row="1" Grid.Column="0" Source="{Binding FlyoutIcon}"
+                       HeightRequest="30"/>
+                <Label Grid.Row="1"
+                       VerticalOptions="Center"
+                       Grid.Column="1" Text="{Binding Title}"
+                       FontAttributes="Bold"/>
+
+                <BoxView Grid.Row="3"
+                         Color="LightGray"
+                         Grid.Column="0"
+                         Grid.ColumnSpan="2"/>
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
+
+    <Shell.FlyoutFooter>
+        <VerticalStackLayout>
+            <Button Text="Logout" CornerRadius="0" Clicked="LogOut_Clicked"/>
+        </VerticalStackLayout>
+    </Shell.FlyoutFooter>
+    
+</Shell>

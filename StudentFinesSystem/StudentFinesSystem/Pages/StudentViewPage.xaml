@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StudentFinesSystem.Pages.StudentViewPage"
+             xmlns:mct ="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             NavigationPage.HasNavigationBar="False"
+             Title="StudentViewPage">
+
+    <ContentPage.Behaviors>
+        <mct:EventToCommandBehavior Command="{Binding OnAppearingCommand}" EventName="Appearing" />
+    </ContentPage.Behaviors>
+
+    <Grid Padding="10">
+        <ScrollView>
+            <ListView x:Name="listView" 
+                  ItemsSource="{Binding StudentFines}"
+                  IsPullToRefreshEnabled="true"
+                  RefreshCommand="{Binding RefreshCommand}"
+                  IsRefreshing="{Binding IsRefreshing}"
+                  CachingStrategy="RecycleElement"> 
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ImageCell ImageSource="fines2.png"
+                           Text="{Binding Fine}"
+                           Detail="{Binding FineDescription}" >
+                            <ImageCell.ContextActions>
+                                <MenuItem Text="Mark as Paid" IsDestructive="True"
+                                  Command="{Binding Source={x:Reference listView}, Path=BindingContext.DeleteCommand}"
+                                  CommandParameter="{Binding .}" />
+                            </ImageCell.ContextActions>
+                        </ImageCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollView>
+        <HorizontalStackLayout HorizontalOptions="End">
+        <Button Text="+"
+            Padding="10"
+            Margin="10"
+            CornerRadius="60"
+            HorizontalOptions="End"
+            VerticalOptions="End"
+            Command="{Binding AddCommand}"/>
+        <Button Text="x"
+            Padding="10"
+            Margin="10"
+            CornerRadius="60"
+            HorizontalOptions="End"
+            VerticalOptions="End"
+            Command="{Binding CloseCommand}"/>
+        </HorizontalStackLayout>
+    </Grid>
+</ContentPage>

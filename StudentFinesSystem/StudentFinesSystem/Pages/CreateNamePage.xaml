@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StudentFinesSystem.Pages.CreateNamePage"
+             xmlns:dType="clr-namespace:StudentFinesSystem.ViewModels"
+             x:DataType="dType:CreateNameViewModel"
+             Title="CreateNamePage">
+    
+    <Grid Padding="10">
+        <ScrollView>
+            <VerticalStackLayout
+             Padding="30,30"
+             Spacing="25">
+                
+                <Image
+                    Source="student_name.jpg"
+                    HeightRequest="185"
+                    Aspect="AspectFit"
+                    SemanticProperties.Description="create person logo" />
+                <Label
+                    Text="Create User"
+                    Style="{StaticResource Headline}"
+                    SemanticProperties.HeadingLevel="Level1" />
+                
+                <Entry
+                    Text="{Binding FirstName}"
+                    TextTransform="Uppercase"
+                    Placeholder="First Name"
+                    SemanticProperties.Hint="Input first name"/>
+
+                <Entry
+                    Text="{Binding MiddleName}"
+                    TextTransform="Uppercase"
+                    Placeholder="Middle Name"
+                    SemanticProperties.Hint="Input middle name"/>
+
+                <Entry
+                    Text="{Binding LastName}"
+                    TextTransform="Uppercase"
+                    Placeholder="Last Name"
+                    SemanticProperties.Hint="Input last name"/>
+
+                <Picker x:Name="picker"
+                            SelectedItem="{Binding Gender}"
+                            Title="Select Gender">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>MALE</x:String>
+                            <x:String>FEMALE</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+
+                <Button
+                    x:Name="CreateBtn"
+                    Text="Save User" 
+                    SemanticProperties.Hint="create user click"
+                    Command="{Binding SaveUserCommand}"
+                    HorizontalOptions="Fill"
+                    CornerRadius="40"
+                    HeightRequest="60"/>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

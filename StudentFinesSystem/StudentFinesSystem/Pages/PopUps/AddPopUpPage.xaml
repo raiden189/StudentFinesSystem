@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="StudentFinesSystem.Pages.AddPopUpPage"
+             Color="Transparent"
+             CanBeDismissedByTappingOutsideOfPopup="False">
+
+    <mct:Popup.Resources>
+        <Style x:Key="InvalidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Red" />
+        </Style>
+        <Style x:Key="ValidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Green" />
+        </Style>
+    </mct:Popup.Resources>
+
+    <Border Margin="20" Padding="20" BackgroundColor="PapayaWhip" VerticalOptions="Fill">
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="40" Stroke="Transparent"/>
+        </Border.StrokeShape>
+        <VerticalStackLayout Spacing="5">
+            <Image
+            Source="add_fine.png"
+            HeightRequest="100"
+            Aspect="AspectFit"
+            SemanticProperties.Description="update fines image" />
+
+          <Entry
+            Text="{Binding FineName}"
+            Placeholder="Name"
+            MinimumWidthRequest="200"
+            SemanticProperties.Hint="Fine Name"/>
+
+          <Entry
+            Text="{Binding FineDescription}"
+            Placeholder="Description"
+            MinimumWidthRequest="200"
+            SemanticProperties.Hint="Fine Description"/>
+
+            <Entry
+                 Text="{Binding Fine}"
+                 Placeholder="Amount"
+                 MinimumWidthRequest="200"
+                  Keyboard="Numeric"
+                 SemanticProperties.Hint="Fine">
+                <Entry.Behaviors>
+                    <mct:NumericValidationBehavior 
+                        InvalidStyle="{StaticResource InvalidEntryStyle}"
+                        ValidStyle="{StaticResource ValidEntryStyle}"
+                        Flags="ValidateOnValueChanged"
+                        MinimumValue="1.0"
+                        MaximumValue="100000.0"
+                        MaximumDecimalPlaces="2" />
+                </Entry.Behaviors>
+            </Entry>
+
+            <HorizontalStackLayout>
+                <Button Text="Add"
+                 Padding="10"
+                 Margin="10"                          
+                 CornerRadius="10"
+                 Command="{Binding AddCommand}"
+                 HorizontalOptions="End"
+                 VerticalOptions="End"/>
+
+             <Button Text="Close"
+                 Padding="10"
+                 Margin="10"
+                 CornerRadius="10"
+                 HorizontalOptions="End"
+                 VerticalOptions="End"                                
+                 Clicked="Button_Clicked"/>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </Border>
+</mct:Popup>

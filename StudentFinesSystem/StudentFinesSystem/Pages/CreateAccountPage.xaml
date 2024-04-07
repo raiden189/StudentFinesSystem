@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StudentFinesSystem.CreateAccountPage"
+             xmlns:toolkit ="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:local="clr-namespace:StudentFinesSystem.Converter"
+             Title="CreateAccountPage"
+             xmlns:dType="clr-namespace:StudentFinesSystem.ViewModels"
+             x:DataType="dType:CreateAccountViewModel">
+
+    <ContentPage.Resources>
+        <local:FirstValidationErrorConverter x:Key="firstValidationErrorConverter" />
+        <Style x:Key="InvalidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Red" />
+        </Style>
+        <Style x:Key="ValidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Green" />
+        </Style>
+        <Style x:Key="ValidationErrorLabelStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Red" />
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid Padding="10">
+        <ScrollView>
+            <VerticalStackLayout
+                Padding="30,30"
+                Spacing="25">
+                <Image
+                        Source="create_account.jpg"
+                        HeightRequest="185"
+                        Aspect="AspectFit"
+                        SemanticProperties.Description="create account logo" />
+                <Label
+                        Text="Create Account"
+                        Style="{StaticResource Headline}"
+                        SemanticProperties.HeadingLevel="Level1" />
+                <StackLayout>
+                    <Entry
+                        Text="{Binding UserName.Value, Mode=TwoWay}"
+                        Placeholder="Email"
+                        SemanticProperties.Hint="Input Username">
+                    <Entry.Style>
+                        <OnPlatform x:TypeArguments="Style">
+                            <On Platform="iOS, Android" Value="{StaticResource ValidEntryStyle}" />
+                            <On Platform="WinUI" Value="{StaticResource ValidEntryStyle}" />
+                        </OnPlatform>
+                    </Entry.Style>
+                    <Entry.Behaviors>
+                        <toolkit:EventToCommandBehavior
+                            EventName="TextChanged"/>
+                                    </Entry.Behaviors>
+                                    <Entry.Triggers>
+                                    <DataTrigger 
+                            TargetType="Entry"
+                            Binding="{Binding UserName.IsValid}"
+                            Value="False">
+                            <Setter Property="BackgroundColor" Value="{StaticResource ErrorColor}" />
+                        </DataTrigger>
+                    </Entry.Triggers>
+                </Entry>
+                <Label
+                    Text="{Binding UserName.Errors, Converter={StaticResource firstValidationErrorConverter}}"
+                    Style="{StaticResource ValidationErrorLabelStyle}" IsVisible="{Binding IsVisibleUsernameError}" />
+                </StackLayout>
+                <Entry
+                        Text="{Binding Password.Value, Mode=TwoWay}"
+                        Placeholder="Password"
+                        IsPassword="True"
+                        SemanticProperties.Hint="Password">
+                    
+                    <Entry.Style>
+                        <OnPlatform x:TypeArguments="Style">
+                            <On Platform="iOS, Android" Value="{StaticResource ValidEntryStyle}" />
+                            <On Platform="WinUI" Value="{StaticResource ValidEntryStyle}" />
+                        </OnPlatform>
+                    </Entry.Style>
+                    <Entry.Behaviors>
+                        <toolkit:EventToCommandBehavior
+                                EventName="TextChanged"/>
+                    </Entry.Behaviors>
+                    <Entry.Triggers>
+                        <DataTrigger 
+                                TargetType="Entry"
+                                Binding="{Binding Password.IsValid}"
+                                Value="False">
+                            <Setter Property="BackgroundColor" Value="{StaticResource ErrorColor}" />
+                        </DataTrigger>
+                    </Entry.Triggers>
+                </Entry>
+                <Label
+                    Text="{Binding Password.Errors, Converter={StaticResource firstValidationErrorConverter}}"
+                    Style="{StaticResource ValidationErrorLabelStyle}" IsVisible="{Binding IsVisiblePassError}" />
+                
+                <Entry
+                       Text="{Binding ConfirmPassword.Value, Mode=TwoWay}"
+                       Placeholder="Confirm Password"
+                       IsPassword="True"
+                       SemanticProperties.Hint="Confirm Password">
+                    <Entry.Style>
+                        <OnPlatform x:TypeArguments="Style">
+                            <On Platform="iOS, Android" Value="{StaticResource ValidEntryStyle}" />
+                            <On Platform="WinUI" Value="{StaticResource ValidEntryStyle}" />
+                        </OnPlatform>
+                    </Entry.Style>
+                    <Entry.Behaviors>
+                        <toolkit:EventToCommandBehavior
+                            EventName="TextChanged"/>
+                    </Entry.Behaviors>
+                    <Entry.Triggers>
+                        <DataTrigger 
+                            TargetType="Entry"
+                            Binding="{Binding ConfirmPassword.IsValid}"
+                            Value="False">
+                            <Setter Property="BackgroundColor" Value="{StaticResource ErrorColor}" />
+                        </DataTrigger>
+                    </Entry.Triggers>
+                </Entry>
+                <Label
+                    Text="{Binding ConfirmPassword.Errors, Converter={StaticResource firstValidationErrorConverter}}"
+                    Style="{StaticResource ValidationErrorLabelStyle}" IsVisible="{Binding IsVisibleConPassError}" />
+
+
+                <Button
+                    x:Name="CreateBtn"
+                    Text="Create Account" 
+                    SemanticProperties.Hint="create account click"
+                    Command="{Binding SignUpCommand}"
+                    HorizontalOptions="Fill"
+                    CornerRadius="40"
+                    HeightRequest="60"/>
+                <Label HorizontalOptions="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Already have an account? "
+                                TextColor="Gray"/>
+                            <Span Text="Sign In"
+                              TextColor="Blue"
+                              TextDecorations="Underline">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding LoginCommand}"/>
+                                </Span.GestureRecognizers>
+                            </Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit ="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="StudentFinesSystem.LoginPage"
+             xmlns:dType="clr-namespace:StudentFinesSystem.ViewModels"
+             x:DataType="dType:LoginViewModel">
+
+    <ContentPage.Resources>
+        <Style x:Key="InvalidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Red" />
+        </Style>
+        <Style x:Key="ValidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Green" />
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid Padding="10">
+        <ScrollView>
+            <VerticalStackLayout
+            Padding="30,30"
+            Spacing="25">
+                <Image
+                Source="logo.png"
+                HeightRequest="185"
+                Aspect="AspectFit"
+                SemanticProperties.Description="RMI Logo" />
+
+                <Label
+                Text="Login"
+                Style="{StaticResource Headline}"
+                SemanticProperties.HeadingLevel="Level1" />
+
+                <Label
+                Text="Student Fines System"
+                Style="{StaticResource SubHeadline}"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
+
+                <Entry
+                x:Name="Username"
+                Text="{Binding UserName}"
+                Placeholder="Email"
+                SemanticProperties.Hint="Input Username"
+                >
+                    <Entry.Behaviors>
+                        <toolkit:EmailValidationBehavior 
+                            InvalidStyle="{StaticResource InvalidEntryStyle}"
+                            ValidStyle="{StaticResource ValidEntryStyle}"
+                            Flags="ValidateOnValueChanged" />
+                                </Entry.Behaviors>
+                </Entry>
+
+                <Entry
+                x:Name="Password"
+                Text="{Binding Password}"
+                Placeholder="Password"
+                IsPassword="True"
+                SemanticProperties.Hint="Input Password"
+                />
+
+                <Button
+                x:Name="LoginBtn"
+                Text="Submit" 
+                SemanticProperties.Hint="submit login click"
+                Command="{Binding LoginCommand}"
+                HorizontalOptions="Fill" />
+                <Label HorizontalOptions="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Don't have an account? "
+                              TextColor="Gray"/>
+                            <Span Text="Sign up"
+                              TextColor="Blue"
+                              TextDecorations="Underline">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SignUpCommand}"/>
+                                </Span.GestureRecognizers>
+                            </Span>
+                            <Span Text=" Now."
+                              TextColor="Gray"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </VerticalStackLayout>
+        </ScrollView>
+        <Label VerticalOptions="End" Text="Copyright © 2024 RMI Dapitan City, All rights reserved." TextColor="Gray" FontSize="10" HorizontalTextAlignment="Center"/>
+    </Grid>
+</ContentPage>

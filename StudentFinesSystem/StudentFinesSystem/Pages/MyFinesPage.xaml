@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:searchHandler="clr-namespace:StudentFinesSystem.Controls"
+             xmlns:mct ="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="StudentFinesSystem.MyFinesPage"
+             Shell.BackgroundColor="DarkBlue"
+             Shell.NavBarHasShadow="True">
+
+    <ContentPage.Behaviors>
+        <mct:EventToCommandBehavior Command="{Binding OnAppearingCommand}" EventName="Appearing" />
+    </ContentPage.Behaviors>
+
+    <Shell.SearchHandler>
+        <searchHandler:StudentSearchHandler
+                                   ShowsResults="true"
+                                   DisplayMemberName="FullName"
+                                   BackgroundColor="DarkBlue"
+                                   Students="{Binding Students, Mode=TwoWay}"/>
+    </Shell.SearchHandler>
+
+    <Grid Padding="10">
+        <ScrollView>
+            <ListView x:Name="listView" 
+              ItemsSource="{Binding StudentFines}"
+              IsPullToRefreshEnabled="true"
+              RefreshCommand="{Binding RefreshCommand}"
+              IsRefreshing="{Binding IsRefreshing}"
+              CachingStrategy="RecycleElement">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ImageCell ImageSource="fines2.png"
+                       Text="{Binding Fine}"
+                       Detail="{Binding FineDescription}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollView>
+        <HorizontalStackLayout Padding="10" HorizontalOptions="Start" VerticalOptions="End">
+            <Label>
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="TOTAL: "
+                              TextColor="Black"
+                              FontAttributes="Bold"/>
+                        <Span Text="{Binding Total}"
+                              TextColor="Blue"
+                              FontAttributes="Bold"
+                              TextDecorations="Underline">
+                        </Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </HorizontalStackLayout>
+    </Grid>
+</ContentPage>

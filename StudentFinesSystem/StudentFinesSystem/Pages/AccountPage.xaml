@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mct ="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="StudentFinesSystem.AccountPage"
+             Shell.NavBarIsVisible="False"
+             xmlns:dType="clr-namespace:StudentFinesSystem.ViewModels"
+             x:DataType="dType:AccountViewModel"
+             Title="AccountPage">
+    
+    <ContentPage.Behaviors>
+        <mct:EventToCommandBehavior Command="{Binding OnAppearingCommand}" EventName="Appearing" />
+    </ContentPage.Behaviors>
+    
+    <Grid Padding="10">
+        <ScrollView>
+            <VerticalStackLayout
+             Padding="30,30"
+             Spacing="25">
+
+                <VerticalStackLayout.Background>
+                    <RadialGradientBrush Center=".5,-0.2">
+                        <GradientStop Color="MediumPurple"
+                  Offset="1" />
+                        <GradientStop Color="White"
+                  Offset="1.0" />
+                    </RadialGradientBrush>
+                </VerticalStackLayout.Background>
+
+                <Image
+                     Source="account_info.png"
+                     HeightRequest="185"
+                     Aspect="AspectFit"
+                     SemanticProperties.Description="create account logo" />  
+                
+                <Label
+                     Text="My Account"
+                     Style="{StaticResource Headline}"
+                     SemanticProperties.HeadingLevel="Level1" />
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Start" BackgroundColor="White">
+                    <Image Source="email.png" HeightRequest="50" WidthRequest="50" Aspect="AspectFill"/>
+                    <StackLayout HorizontalOptions="Start" Margin="20">
+                        <Label HorizontalOptions="Fill" 
+                               FontSize="20"
+                               Text="{Binding Email}" 
+                               FontAttributes="Bold" 
+                               TextColor="Black"/>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Start" BackgroundColor="White">
+                    <Image Source="name.png" HeightRequest="50" WidthRequest="50" Aspect="AspectFill"/>
+                    <StackLayout HorizontalOptions="Start" Margin="25">
+                        <Label HorizontalOptions="Fill" 
+                               FontSize="17"
+                               Text="{Binding FullName}" 
+                               FontAttributes="Bold" 
+                               TextColor="Black"/>
+                    </StackLayout>
+                </StackLayout>
+                <Button
+                    Text="Change Password" 
+                    SemanticProperties.Hint="create account click"
+                    Command="{Binding ChangePasswordCommand}"
+                    HorizontalOptions="Fill"
+                    CornerRadius="40"
+                    HeightRequest="60"/>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

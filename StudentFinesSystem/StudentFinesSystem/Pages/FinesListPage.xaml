@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:searchHandler="clr-namespace:StudentFinesSystem.Controls"
+             xmlns:mct ="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="StudentFinesSystem.FinesListPage"
+             Shell.BackgroundColor="DarkBlue"
+             NavigationPage.HasNavigationBar="False">
+    
+    <ContentPage.Behaviors>
+        <mct:EventToCommandBehavior Command="{Binding OnAppearingCommand}" EventName="Appearing" />
+    </ContentPage.Behaviors>
+
+    <Shell.SearchHandler>
+        <searchHandler:StudentSearchHandler
+                                  ShowsResults="true"
+                                  DisplayMemberName="FullName"
+                                  BackgroundColor="DarkBlue"/>
+    </Shell.SearchHandler>
+
+    <Grid Padding="10">
+        <ScrollView>
+            <ListView x:Name="listView" 
+              ItemsSource="{Binding Fines}"
+              IsPullToRefreshEnabled="true"
+              RefreshCommand="{Binding RefreshCommand}"
+              IsRefreshing="{Binding IsRefreshing}"
+              CachingStrategy="RecycleElement"> 
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ImageCell ImageSource="fines2.png"
+                           Text="{Binding Fine}"
+                           Detail="{Binding FineDescription}" >
+                            <ImageCell.ContextActions>
+                                <MenuItem Text="Update" IsDestructive="True"
+                                  Command="{Binding Source={x:Reference listView}, Path=BindingContext.UpdateCommand}"
+                                  CommandParameter="{Binding .}" />
+                            </ImageCell.ContextActions>
+                        </ImageCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollView>
+        <Button Text="+"
+            Padding="10"
+            Margin="10"
+            CornerRadius="60"
+            HorizontalOptions="End"
+            VerticalOptions="End"
+            Command="{Binding AddCommand}"/>
+    </Grid>
+</ContentPage>

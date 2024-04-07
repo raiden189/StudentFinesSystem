@@ -1,7 +1,9 @@
 ﻿CREATE TABLE [dbo].[User]
 (
-	[UserId] INT NOT NULL PRIMARY KEY IDENTITY, 
+	[Id] NVARCHAR(128) NOT NULL PRIMARY KEY, 
     [FirstName] NVARCHAR(50) NOT NULL, 
     [MiddleName] NVARCHAR(50) NOT NULL, 
-    [LastName] NVARCHAR(50) NOT NULL,
+    [LastName] NVARCHAR(50) NOT NULL, 
+    [Gender] NVARCHAR(50) NOT NULL,
+    [CreateDate] DATETIME2 NOT NULL DEFAULT (getutcdate()),
 )
